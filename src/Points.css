@@ -1,0 +1,15 @@
+.points {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .points-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .player-points {
+    font-size: 18px;
+    font-weight: bold;
+  }
