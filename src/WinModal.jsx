@@ -7,7 +7,7 @@ const WinModal = ({ winner, onReset }) => {
     <div className="modal">
       <div className="modal-content">
         <h2>{winner} wins!</h2>
-        <button onClick={onReset}>Play Again</button>
+        <button onClick={onReset}>Jugar otra vez</button>
       </div>
     </div>
   )

@@ -6,8 +6,8 @@ const TieModal = ({ isTie, onReset }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>It's a tie!</h2>
-        <button onClick={onReset}>Play Again</button>
+        <h2>¡Empate!</h2>
+        <button onClick={onReset}>Jugar otra vez</button>
       </div>
     </div>
   )
