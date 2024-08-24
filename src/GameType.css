@@ -1,0 +1,22 @@
+
+
+.GameType{
+  position: fixed;
+  display: flex;
+  left: 0;
+  bottom: 0;
+}
+
+
+.GameType__Button{
+    display: flex;
+    margin: .7em;
+    padding: .7em 1.4em;
+    border: 1px solid #000;
+    border-radius: .4em;
+    background-color: #fff;
+    cursor: pointer;
+}
+.GameType__Button:hover{
+    background-color: #f0f0f0;
+  }   
