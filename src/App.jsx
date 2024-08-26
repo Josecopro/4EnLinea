@@ -13,7 +13,7 @@ function App() {
   const [isTie, setIsTie] = useState(false);
   const [points, setPoints] = useState({ rojo: 0, amarillo: 0 });
   const [lastWinner, setLastWinner] = useState(null);
-  const [gameStarted, setGameStarted] = useState(true);
+  const [gameStarted, setGameStarted] = useState(false);
   const [hasFirstMove, setHasFirstMove] = useState(false);
 
 
@@ -167,11 +167,13 @@ function App() {
   return (
     <div className="App">
       <h1>4 en linea</h1>
+      {gameStarted && (
+        <section className='GameStarted'>
+          
       <Points points={points} />
       <WinModal winner={winner} onReset={() => resetGame(boardSize)} />
       <TieModal isTie={isTie} onReset={() => resetGame(boardSize)} />
-      {gameStarted && (
-        <div className="board" style={{ '--board-size': boardSize }}>
+      <div className="board" style={{ '--board-size': boardSize }}>
           {board.map((row, rowIndex) => (
             <div key={rowIndex} className="row">
               {row.map((cell, columnIndex) => (
@@ -183,7 +185,9 @@ function App() {
               ))}
             </div>
           ))}
-        </div>
+        </div>  
+        </section>
+
       )}
       <div className="GameType">
         {!hasFirstMove && <GameType onSelect={resetGame} />}

@@ -23,3 +23,17 @@ button {
   font-size: 16px;
   cursor: pointer;
 }
+.Points--yellow:hover{
+  transition: all ease 0.5s;
+  color: #f1c40f;
+}
+.Points--red:hover{
+  transition: all ease 0.5s;
+  color: #e74c3c;
+}
+.Points--yellow{
+  transition: all ease 0.5s;
+}
+.Points--red{
+  transition: all ease 0.5s;
+}
