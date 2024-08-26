@@ -8,12 +8,12 @@ import { GameType } from './GameType.jsx';
 function App() {
   const [boardSize, setBoardSize] = useState(6);
   const [board, setBoard] = useState(Array.from({ length: boardSize }, () => Array(boardSize).fill(null)));
-  const [currentPlayer, setCurrentPlayer] = useState('red');
+  const [currentPlayer, setCurrentPlayer] = useState('rojo');
   const [winner, setWinner] = useState(null);
   const [isTie, setIsTie] = useState(false);
-  const [points, setPoints] = useState({ red: 0, yellow: 0 });
+  const [points, setPoints] = useState({ rojo: 0, amarillo: 0 });
   const [lastWinner, setLastWinner] = useState(null);
-  const [gameStarted, setGameStarted] = useState(false);
+  const [gameStarted, setGameStarted] = useState(true);
   const [hasFirstMove, setHasFirstMove] = useState(false);
 
 
@@ -45,11 +45,11 @@ function App() {
     if (checkForWin(updatedBoard, rowIndex, columnIndex, currentPlayer)) {
       setWinner(currentPlayer);
       updatePoints(currentPlayer);
-    } else if (checkForTie(updatedBoard)) {
+    } else if (checkForProactiveTie(updatedBoard)) {
       setIsTie(true);
     } else {
       // Switch to the next player
-      setCurrentPlayer(currentPlayer === 'red' ? 'yellow' : 'red');
+      setCurrentPlayer(currentPlayer === 'rojo' ? 'amarillo' : 'rojo');
     }
   };
 
@@ -88,8 +88,57 @@ function App() {
     return count >= winCondition;
   };
 
-  const checkForTie = (board) => {
-    return board.every(row => row.every(cell => cell !== null));
+  const checkForProactiveTie = (board) => {
+    for (let rowIndex = 0; rowIndex < boardSize; rowIndex++) {
+      for (let colIndex = 0; colIndex < boardSize; colIndex++) {
+        if (board[rowIndex][colIndex] === null) {
+          // Verificar si es posible ganar a partir de esta celda vacía
+          if (checkPossibleWin(board, rowIndex, colIndex)) {
+            return false;  // Aún es posible ganar, no es empate
+          }
+        }
+      }
+    }
+    return true;  // No es posible ganar, es empate
+  };
+
+  const checkPossibleWin = (board, row, col) => {
+    const directions = [
+      { rowDir: 1, colDir: 0 },  // Vertical
+      { rowDir: 0, colDir: 1 },  // Horizontal
+      { rowDir: 1, colDir: 1 },  // Diagonal /
+      { rowDir: 1, colDir: -1 }  // Diagonal \
+    ];
+  
+    for (const { rowDir, colDir } of directions) {
+      let count = 1;
+  
+      // Contar en la dirección positiva
+      count += countInDirection(board, row, col, rowDir, colDir);
+  
+      // Contar en la dirección negativa
+      count += countInDirection(board, row, col, -rowDir, -colDir);
+  
+      if (count >= 4) {
+        return true;  // Aún es posible ganar en esta dirección
+      }
+    }
+  
+    return false;  // No es posible ganar en ninguna dirección desde esta celda
+  };
+
+  const countInDirection = (board, row, col, rowDir, colDir) => {
+    let count = 0;
+    let r = row + rowDir;
+    let c = col + colDir;
+  
+    while (r >= 0 && r < boardSize && c >= 0 && c < boardSize && board[r][c] === null) {
+      count++;
+      r += rowDir;
+      c += colDir;
+    }
+  
+    return count;
   };
 
   const updatePoints = (winner) => {
@@ -108,7 +157,7 @@ function App() {
   const resetGame = (size) => {
     setBoardSize(size);
     setBoard(Array.from({ length: size }, () => Array(size).fill(null)));
-    setCurrentPlayer(winner ? winner : 'red');
+    setCurrentPlayer(winner ? winner : 'rojo');
     setWinner(null);
     setIsTie(false);
     setGameStarted(true);

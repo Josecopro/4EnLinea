@@ -37,11 +37,11 @@ body {
   align-items: center;
 }
 
-.cell.red {
+.cell.rojo {
   background-color: red;
 }
 
-.cell.yellow {
+.cell.amarillo {
   background-color: yellow;
 }
 
