@@ -113,18 +113,17 @@ function App() {
     for (const { rowDir, colDir } of directions) {
       let count = 1;
   
-      // Contar en la dirección positiva
       count += countInDirection(board, row, col, rowDir, colDir);
   
       // Contar en la dirección negativa
       count += countInDirection(board, row, col, -rowDir, -colDir);
   
       if (count >= 4) {
-        return true;  // Aún es posible ganar en esta dirección
+        return true;  
       }
     }
   
-    return false;  // No es posible ganar en ninguna dirección desde esta celda
+    return false;  
   };
 
   const countInDirection = (board, row, col, rowDir, colDir) => {
@@ -167,12 +166,11 @@ function App() {
   return (
     <div className="App">
       <h1>4 en linea</h1>
-      {gameStarted && (
-        <section className='GameStarted'>
-          
-      <Points points={points} />
       <WinModal winner={winner} onReset={() => resetGame(boardSize)} />
       <TieModal isTie={isTie} onReset={() => resetGame(boardSize)} />
+      {gameStarted && (
+        <section className='GameStarted'>
+      <Points points={points} />
       <div className="board" style={{ '--board-size': boardSize }}>
           {board.map((row, rowIndex) => (
             <div key={rowIndex} className="row">
