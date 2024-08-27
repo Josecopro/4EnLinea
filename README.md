@@ -1,8 +1,8 @@
-# React + Vite
+# ¿Eres curioso de como funciona nuestro 4 En Linea?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Para que tengas la idea de como funciona desde su mas bajo nivel, esto esta hecho en react, un framework de JavaScript para realizar sitios web dinamicos, igual que el sistema en el que esta basado!
 
-Currently, two official plugins are available:
+## Estos son los comandos para ejecutar el codigo!
+`npm install`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`npm run dev`
